@@ -1,0 +1,89 @@
+Started by user admin
+Running as SYSTEM
+Building remotely on jenkins-agent-01 (linux ansible) in workspace /opt/jenkins_agent/workspace/freestile_molecule
+The recommended git tool is: NONE
+using credential 05ddb994-97ec-4679-b27d-fa99ed91ab6e
+ > git rev-parse --resolve-git-dir /opt/jenkins_agent/workspace/freestile_molecule/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/AleksandrOdintsov/ansible-vector-role.git # timeout=10
+Fetching upstream changes from https://github.com/AleksandrOdintsov/ansible-vector-role.git
+ > git --version # timeout=10
+ > git --version # 'git version 1.8.3.1'
+using GIT_SSH to set credentials 
+[INFO] Currently running in a labeled security context
+[INFO] Currently SELinux is 'enforcing' on the host
+ > /usr/bin/chcon --type=ssh_home_t /opt/jenkins_agent/workspace/freestile_molecule@tmp/jenkins-gitclient-ssh16817279080241433110.key
+Verifying host key using known hosts file
+You're using 'Known hosts file' strategy to verify ssh host keys, but your known_hosts file does not exist, please go to 'Manage Jenkins' -> 'Security' -> 'Git Host Key Verification Configuration' and configure host key verification.
+ > git fetch --tags --progress https://github.com/AleksandrOdintsov/ansible-vector-role.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision 72a03099f1358a893241160140b9f38d206d1892 (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 72a03099f1358a893241160140b9f38d206d1892 # timeout=10
+Commit message: "Update main.yml"
+ > git rev-list --no-walk 72a03099f1358a893241160140b9f38d206d1892 # timeout=10
+[freestile_molecule] $ /bin/sh -xe /tmp/jenkins7924992578456600970.sh
++ molecule test
+/usr/local/lib/python3.6/site-packages/ansible/parsing/vault/__init__.py:44: CryptographyDeprecationWarning: Python 3.6 is no longer supported by the Python core team. Therefore, support for it is deprecated in cryptography. The next release of cryptography will remove support for Python 3.6.
+  from cryptography.exceptions import InvalidSignature
+INFO     default scenario test matrix: dependency, lint, cleanup, destroy, syntax, create, prepare, converge, idempotence, side_effect, verify, cleanup, destroy
+INFO     Performing prerun...
+INFO     Set ANSIBLE_LIBRARY=/home/jenkins/.cache/ansible-compat/10184e/modules:/home/jenkins/.ansible/plugins/modules:/usr/share/ansible/plugins/modules
+INFO     Set ANSIBLE_COLLECTIONS_PATH=/home/jenkins/.cache/ansible-compat/10184e/collections:/home/jenkins/.ansible/collections:/usr/share/ansible/collections
+INFO     Set ANSIBLE_ROLES_PATH=/home/jenkins/.cache/ansible-compat/10184e/roles:/home/jenkins/.ansible/roles:/usr/share/ansible/roles:/etc/ansible/roles
+INFO     Running default > dependency
+WARNING  Skipping, missing the requirements file.
+WARNING  Skipping, missing the requirements file.
+INFO     Running default > lint
+COMMAND: yamllint .
+ansible-lint . 
+
+Traceback (most recent call last):
+  File "/home/jenkins/.local/bin/ansible-lint", line 5, in <module>
+    from ansiblelint.__main__ import _run_cli_entrypoint
+  File "/home/jenkins/.local/lib/python3.6/site-packages/ansiblelint/__main__.py", line 43, in <module>
+    from ansiblelint.skip_utils import normalize_tag
+  File "/home/jenkins/.local/lib/python3.6/site-packages/ansiblelint/skip_utils.py", line 28, in <module>
+    from ruamel.yaml import YAML  # type: ignore
+  File "/home/jenkins/.local/lib/python3.6/site-packages/ruamel/yaml/__init__.py", line 50, in <module>
+    from .cyaml import *  # NOQA
+  File "/home/jenkins/.local/lib/python3.6/site-packages/ruamel/yaml/cyaml.py", line 3, in <module>
+    from _ruamel_yaml import CParser, CEmitter  # type: ignore
+  File "_ruamel_yaml.pyx", line 18, in init ruamel.yaml.clib._ruamel_yaml
+  File "/home/jenkins/.local/lib/python3.6/site-packages/ruamel/yaml/reader.py", line 25, in <module>
+    from ruamel.yaml.util import RegExp
+  File "/home/jenkins/.local/lib/python3.6/site-packages/ruamel/yaml/util.py", line 13, in <module>
+    from .compat import StreamTextType  # NOQA
+  File "/home/jenkins/.local/lib/python3.6/site-packages/ruamel/yaml/compat.py", line 3
+    from __future__ import annotations
+    ^
+SyntaxError: future feature annotations is not defined
+CRITICAL Lint failed with error code 1
+WARNING  An error occurred during the test sequence action: 'lint'. Cleaning up.
+INFO     Running default > cleanup
+WARNING  Skipping, cleanup playbook not configured.
+INFO     Running default > destroy
+INFO     Sanity checks: 'docker'
+
+PLAY [Destroy] *****************************************************************
+
+TASK [Destroy molecule instance(s)] ********************************************
+/usr/local/lib/python3.6/site-packages/ansible/parsing/vault/__init__.py:44: CryptographyDeprecationWarning: Python 3.6 is no longer supported by the Python core team. Therefore, support for it is deprecated in cryptography. The next release of cryptography will remove support for Python 3.6.
+  from cryptography.exceptions import InvalidSignature
+changed: [localhost] => (item=centos8)
+changed: [localhost] => (item=centos7)
+changed: [localhost] => (item=ubuntu)
+
+TASK [Wait for instance(s) deletion to complete] *******************************
+ok: [localhost] => (item=centos8)
+ok: [localhost] => (item=centos7)
+ok: [localhost] => (item=ubuntu)
+
+TASK [Delete docker networks(s)] ***********************************************
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=2    changed=1    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0
+
+INFO     Pruning extra files from scenario ephemeral directory
+Build step 'Execute shell' marked build as failure
+Finished: FAILURE
